@@ -2,9 +2,18 @@
 doctype html
 html
   head
-    title #{yield(:title)} | #{yield(:base)}
+    title = full_title(yield(:title))
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = yield
+    header class="navbar navbar-fixed-top navbar-inverse"
+      div class="container"
+      = link_to "Sample App", "#", id:"logo"
+      nav class="nav navbar-nav navbar-right"
+        ul
+          li = link_to "Home", "#"
+          li = link_to "Help", "#"
+          li = link_to "Login", "#"
+    div class="container"
+      = yield

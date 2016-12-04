@@ -114,6 +114,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-byebug (3.4.1)
+      byebug (~> 9.0)
+      pry (~> 0.10)
+    pry-rails (0.3.4)
+      pry (>= 0.9.10)
     puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -203,7 +208,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   coffee-rails (~> 4.2)
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
@@ -214,6 +218,8 @@ DEPENDENCIES
   minitest (= 5.9.1)
   minitest-reporters
   pg (= 0.18.4)
+  pry-byebug
+  pry-rails
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   rails-controller-testing (= 0.1.1)
