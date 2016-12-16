@@ -45,4 +45,27 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "a" * 5
     assert_not @user.valid?
   end
+
+  test "email should be downcased before save" do
+    old_email = @user.email = "aVaLiDeMail@emaiL.com"
+    @user.save
+    assert_equal old_email.downcase, @user.reload.email
+  end
+
+  test "valid emails should be accepted" do
+    valid_emails = %w[ asdf.dsfsfd@gmail.com bad-er3.EFDS.c@e-ef.c.ge a@a.a ]
+    valid_emails.each do |email|
+      @user.email = email
+      assert @user.valid?, "#{email.inspect} should be valid"
+    end
+  end
+
+  test "invalid emails should be rejected" do
+    invalid_emails = %w[ sdf-@c.c sdf..@d.c ..@.. vdvd.@d.c user@example,com user_at_foo.org user.name@example.
+                               foo@bar_baz.com foo@bar+baz.com ]
+    invalid_emails.each do |email|
+      @user.email = email
+      assert_not @user.valid?, "#{email.inspect} should be invalid"
+    end
+  end
 end
