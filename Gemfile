@@ -35,15 +35,16 @@ group :development, :test do
   gem 'pry-rails'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  gem 'minitest', '5.9.1'
+  gem 'minitest'
   gem 'minitest-reporters'
+  gem 'guard'
+  gem 'guard-bundler'
+  #gem 'guard-rails'
+  gem 'guard-minitest'
 end
 
 group :test do
   gem 'rails-controller-testing', '0.1.1'
-  gem 'guard',                    '2.13.0'
-  gem 'guard-rails'
-  gem 'guard-minitest',           '2.4.4'
 end
 
 group :development do

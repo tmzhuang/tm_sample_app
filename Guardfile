@@ -14,6 +14,10 @@
 #  $ ln -s config/Guardfile .
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
+#
+#For unlimited guard instances
+port = 3000
+port += 1 while system("lsof -i:#{port}")
 
 guard :minitest, spring: "bin/rails test", all_on_start: false do
   # with Minitest::Unit
@@ -41,6 +45,15 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   # watch(%r{^app/models/(.*)\.rb$})      { |m| "test/unit/#{m[1]}_test.rb" }
 end
 
+#guard :rails, debugger: true, port: port, host: '0.0.0.0' do
+  #watch('Gemfile.lock')
+  #watch(%r{^(config|lib)/.*})
+#end
+
+guard :bundler do
+  watch('Gemfile')
+end
+
 # Guard-Rails supports a lot options with default values:
 # daemon: false                        # runs the server as a daemon.
 # debugger: false                      # enable ruby-debug gem.
@@ -56,13 +69,3 @@ end
 # zeus_plan: server                    # custom plan in zeus, only works with `zeus: true`.
 # zeus: false                          # enables zeus gem.
 # CLI: 'rails server'                  # customizes runner command. Omits all options except `pid_file`!
-
-
-#For unlimited guard instances
-port = 3000
-port += 1 while system("lsof -i:#{port}")
-
-guard :rails, port: port, host: '0.0.0.0' do
-  watch('Gemfile.lock')
-  watch(%r{^(config|lib)/.*})
-end
