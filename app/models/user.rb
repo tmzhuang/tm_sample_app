@@ -14,4 +14,11 @@ class User < ApplicationRecord
     format: { with: email_regex }
   validates :password, presence: true, length: { minimum: 6 }
 
+  class << self
+    def digest(unencrypted_password)
+      cost = ActiveModel::SecurePassword.min_cost ? 
+        BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+      BCrypt::Password.create(unencrypted_password, cost: cost)
+    end
+  end
 end
